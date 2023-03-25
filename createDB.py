@@ -13,9 +13,11 @@ def main():
 
     for t in soup.body.find_all('tr')[1:]:
         td = t.find_all('td')[0]
-        # print(td[0].find_all('a'))
+
         a = td.find_all('a');
+        
         phVerb:str = ""
+
         if len(a) > 0:
             print(a[0].text)
             phVerb = a[0].text.lower()
@@ -32,8 +34,8 @@ def main():
 
 def getExamples(phVerb: str) -> dict:
     examplesPage = requests.get('https://skypeenglishclasses.com/english-phrasal-verbs/' + phVerb.replace(" ", "-").replace("/", "")).text
-    with open('test.html', 'w') as file:
-        file.write(examplesPage)
+    # with open('test.html', 'w') as file:
+    #     file.write(examplesPage)
 
     soup = BeautifulSoup(examplesPage, features="lxml")
 
