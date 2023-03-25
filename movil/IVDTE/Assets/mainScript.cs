@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Net.Http;
+using System.Net;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using System.Security.Cryptography.X509Certificates;
+using UnityEngine.Android;
 
 
 public class mainScript : MonoBehaviour
@@ -27,8 +31,6 @@ public class mainScript : MonoBehaviour
 
     private QuestionResponse qr;
 
-
-
     // Start is called before the first frame update
     async void Start()
     {
@@ -40,7 +42,10 @@ public class mainScript : MonoBehaviour
         respuesta2.text = "Cargando...";
         respuesta3.text = "Cargando...";
         respuesta4.text = "Cargando...";
-        
+        // var handler = new HttpClientHandler()
+        // {
+        //     SslProtocols = SslProtocols.None
+        // };        
         string jsonString = await getQuestion(new HttpClient());
         qr = QuestionResponse.CreateFromJSON(jsonString);
         
@@ -59,7 +64,7 @@ public class mainScript : MonoBehaviour
 
     private async Task<string> getQuestion(HttpClient httpClient)
     {
-        string url = "http://192.168.1.58:5000/get_new_question";
+        string url = "http://192.168.1.58:6312/get_new_question";
         // var httpClient = ;
         
         question.text = "Esperando respuesta del servidor...";
@@ -83,22 +88,27 @@ public class mainScript : MonoBehaviour
         green.pressedColor = Color.green;
         green.highlightedColor = Color.green;
         green.normalColor = Color.green;
+        green.selectedColor = Color.green;
         switch (qr.solution)
         {
             case 0:
                 b0.colors = green;
+
                 break;
             case 1:
                 b1.colors = green;
+
                 break;
             case 2:
                 b2.colors = green;
+
                 break;
             case 3:
                 b3.colors = green;
+  
                 break;
         }
-
+        
         isCorrect.text = "Ehhh...";
         if (option == qr.solution)
         {

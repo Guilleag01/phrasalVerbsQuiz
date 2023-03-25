@@ -132,7 +132,7 @@ def getNewQuestion() -> str:
         "solution": possibleOptions.index(word)
     }
     
-    jstring = json.dumps(response, ensure_ascii=False).replace(": ", ":").replace(", ", ",")
+    jstring = json.dumps(response, ensure_ascii=False)
     return jstring
 
 
