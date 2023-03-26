@@ -7,4 +7,4 @@ def subir_archivo():
     return getNewQuestion()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=6312)
+    app.run(host='0.0.0.0', debug=True, port=6312, ssl_context=('./cert/server-cert.pem', './cert/server-key.pem')) # , ssl_context='adhoc'
